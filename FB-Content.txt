@@ -1,0 +1,61 @@
+Out_uintSeqID := SeqIndex;
+IF Inp_bEnable OR Inp_bStopping THEN
+	CASE SeqIndex OF
+		0:
+			Out_strSeqMsg := '...';
+			(*Sequence Statement/Command/Instruction*)
+			Out_bBusy := FALSE;
+			Out_bDone := FALSE;
+			...
+			(*Continue Condition*)
+			IF ... THEN
+				SeqIndex := ...;
+			END_IF;
+			(*(Optional)This sequence will be stopped in this seqIndex if machine stopped*)
+			IF Inp_bStopping THEN
+				Out_bStopped := TRUE;
+			END_IF;
+			(*(Optional)Error Condition*)
+			IF ... THEN
+				Out_uintErrorID := ...;
+				Out_strErrorMsg := '...';
+				SeqIndex := 999;
+			END_IF;
+		
+		10:
+			Out_strSeqMsg := '...';
+			(*Sequence Statement/Command/Instruction*)
+			...
+			(*Continue Condition*)
+			IF ... THEN
+				SeqIndex := ...;
+			END_IF;
+			(*(Optional)This sequence will be stopped in this seqIndex if machine stopped*)
+			IF Inp_bStopping THEN
+				Out_bStopped := TRUE;
+			END_IF;
+			(*(Optional)Error Condition*)
+			IF ... THEN
+				Out_uintErrorID := ...;
+				Out_strErrorMsg := '...';
+				SeqIndex := 999;
+			END_IF;
+		999:
+			Out_bError := TRUE;
+	END_CASE;
+ELSE
+	(*If this sequence disabled or stopped*)
+	Out_bStopped := FALSE;
+	...
+	(*If this sequence reseted*)
+	IF Inp_bReset THEN
+		Out_strSeqMsg := '';
+		Out_uintErrorID := 0;
+		Out_strErrorMsg := '';
+		Out_bBusy := FALSE;
+		Out_bDone := FALSE;
+		Out_bError := TRUE;
+		SeqIndex := 0;
+		...
+	END_IF;
+END_IF;

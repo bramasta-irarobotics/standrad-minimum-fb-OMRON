@@ -1,0 +1,14 @@
+===Internals===
+SeqIndex INT
+===In/Out===
+Inp_bEnable	Input	BOOL
+Inp_bStopping	Input	BOOL
+Inp_bReset	Input	BOOL
+Out_bBusy	Output	BOOL
+Out_bDone	Output	BOOL
+Out_bStopped	Output	BOOL
+Out_bError	Output	BOOL
+Out_strErrorMsg	Output	STRING[256]
+Out_uintErrorID	Output	UINT
+Out_strSeqMsg	Output	STRING[256]
+Out_uintSeqID	Output	UINT
